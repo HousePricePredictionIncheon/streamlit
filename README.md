@@ -23,4 +23,6 @@
 1. 우선 레포지토리를 fork받는다. 
 2. 터미널에 fork받고 clone받은 레포지토리로 이동한다. 
 3. 그 후 다음과 같은 명령어를 터미널에 입력한다.
-~~~streamlit run first_app.py~~~
+~~~
+streamlit run first_app.py
+~~~
