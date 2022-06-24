@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import time
 import xgboost as xgb
-
+import data
 
 # xgb모델 불러오기
 xgb_model = xgb.XGBRegressor()
@@ -47,6 +47,14 @@ st.write(contractdate.strftime("%Y%m"))
 
 floor = st.slider("층을 선택하세요", 1, 60)
 builtYear = st.slider("건축년도를 선택하세요(년도)", 1971, 2022)
+
+
+# 지역을 고르는 select box
+option = st.sidebar.selectbox(
+    '어떤 지역을 고르시겠습니까?',
+    ('용현동', '구월동', '송도동', '주안동', "숭의동", "연수동", "부평동", "청라동", "동춘동", "학익동"))
+
+# 지역에 따른 지도 보여주기 및 변수 설정
 market = 1
 park = 6
 pet = 5930
@@ -54,11 +62,104 @@ hospital = 118
 school = 16
 station = 1
 starbucks = 1
+mapalatlon = [37.4468604, 126.6551088]
+if(option == '용현동'):
+    maplatlon = [37.4468604, 126.6551088]
+    park = 6
+    pet = 5930
+    hospital = 118
+    school = 16
+    station = 1
+    starbucks = 1
+elif(option == '구월동'):
+    maplatlon = [37.4385657, 126.6956650]
+    market = 3
+    park = 19
+    pet = 7174
+    hospital = 303
+    school = 30
+    station = 4
+    starbucks = 2
+elif(option == "송도동"):
+    maplatlon = [37.3947, 126.6393]
+    market = 6
+    park = 0
+    pet = 7964
+    hospital = 212
+    school = 50
+    station = 4
+    starbucks = 2
+elif(option == "부평동"):
+    maplatlon = [37.4912, 126.7235]
+    market = 3
+    park = 9
+    pet = 11836
+    hospital = 294
+    school = 23
+    station = 3
+    starbucks = 3
+elif(option == "주안동"):
+    maplatlon = [37.4653, 126.6797]
+    market = 4
+    park = 10
+    pet = 9962
+    hospital = 227
+    school = 23
+    station = 2
+    starbucks = 1
+elif(option == "동춘동"):
+    maplatlon = [37.4032, 126.6694]
+    market = 3
+    park = 8
+    pet = 3331
+    hospital = 63
+    school = 24
+    station = 0
+    starbucks = 2
+elif(option == "숭의동"):
+    maplatlon = [37.4638, 126.6502]
+    market = 2
+    park = 6
+    pet = 3757
+    hospital = 32
+    school = 6
+    station = 0
+    starbucks = 0
+elif(option == "연수동"):
+    maplatlon = [37.4185, 126.6896]
+    market = 0
+    park = 16
+    pet = 3569
+    hospital = 67
+    school = 20
+    station = 5
+    starbucks = 0
+elif(option == "청라동"):
+    maplatlon = [37.5385, 126.6337]
+    market = 3
+    park = 0
+    pet = 5217
+    hospital = 50
+    school = 32
+    station = 0
+    starbucks = 2
+elif(option == "학익동"):
+    maplatlon = [37.4436, 126.6677]
+    market = 0
+    park = 13
+    pet = 2876
+    hospital = 47
+    school = 20
+    station = 0
+    starbucks = 1
 
-# 지역을 고르는 select box
-option = st.sidebar.selectbox(
-    '어떤 지역을 고르시겠습니까?',
-    ('구월동', '용현동', '학익동', '문학동'))
+# 고른 지역 보여주기
+st.write('You selected:', option)
+st.write("pet:", pet)
+map_data = pd.DataFrame(
+    np.random.rand(1, 2) / [50, 50] + maplatlon,
+    columns=['lat', 'lon'])
+st.map(map_data)
 
 # scaling되기 전의 데이터
 realData = [[width, contract, floor, builtYear, market,
@@ -75,25 +176,3 @@ res1 = xgb_model.predict(scaleData)
 
 # 결과 출력
 st.write(res1)
-
-# 지역에 따른 지도 보여주기 및 변수 설정
-mapalatlon = [37.4468604, 126.6551088]
-if(option == '용현동'):
-    maplatlon = [37.4468604, 126.6551088]
-    market = 1
-    park = 6
-    pet = 5930
-    hospital = 118
-    school = 16
-    station = 1
-    starbucks = 1
-
-elif(option == '구월동'):
-    maplatlon = [37.4385657, 126.6956650]
-
-# 고른 지역 보여주기
-st.write('You selected:', option)
-map_data = pd.DataFrame(
-    np.random.rand(1, 2) / [50, 50] + maplatlon,
-    columns=['lat', 'lon'])
-st.map(map_data)
