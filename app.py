@@ -47,9 +47,7 @@ maxs = [291.335999, 202204.0, 60, 2022.0, 6.0, 28.0, 11863, 303, 50, 6, 5]
 mins = [11.946, 202104, 1, 1971, 0, 0, 0, 0, 0, 0, 0]
 
 # 지역 변수를 제외한 나머지 변수 설정하는 sidebar
-
 width = st.slider("면적을 선택하세요 단위(m^2)", 11, 291)
-#contract = st.slider("계약년월을 선택하세요(년월)", 202104, 202204)
 # 6. 날짜 입력
 contractdate = st.date_input('계약년월')  # 디폴트로 오늘 날짜가 찍혀 있다.
 contractString = contractdate.strftime("%Y%m")
@@ -66,6 +64,7 @@ option = st.sidebar.selectbox(
     ('용현동', '구월동', '송도동', '주안동', "숭의동", "연수동", "부평동", "청라동", "동춘동", "학익동"))
 st.sidebar.write("개발자 블로그")
 st.sidebar.markdown("[호정의 개발 블로그](https://hojung-testbench.tistory.com/)")
+
 
 # 지역에 따른 지도 보여주기 및 변수 설정
 market = 1
@@ -203,6 +202,7 @@ def krw_to_korean_won(arg):
         return '{0}원'.format(amount[-4:])
 
 
+# 옵션과 집값 예측 결과 출력
 st.subheader("선택하신 옵션은 다음과 같습니다: ", option)
 st.write("면적:", width, " 계약년월: ", contract, " 층:", floor, " 건축년도:", builtYear)
 result = round(res1[0] * 10000, -1)
