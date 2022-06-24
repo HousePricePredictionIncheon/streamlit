@@ -26,7 +26,17 @@ for i in range(100):
 # 변수는 총 11개
 # 순서대로 전용면적, 계약년월, 거래금액, 층, 건축년도, 대규모 점포, 근린공원, 반료동물 등록 수, 병원, 학교, station, starbucks
 st.write("고려한 변수는 총 11개 입니다.")
-st.write("전용면적, 계약년월, 층, 건축년도, 대규모 점포, 근린 공원, 반려동물 등록 수, 병원, 학교, 지하철 역 개수, startbucks 수")
+st.markdown("1. 전용면적")
+st.markdown("2. 계약년월 ")
+st.markdown("3. 층")
+st.markdown("4. 건축년도")
+st.markdown("5. 대규모 점포")
+st.markdown("6. 근린공원")
+st.markdown("7. 반려동물 등록 수")
+st.markdown("8. 병원")
+st.markdown("9. 학교")
+st.markdown("10. 지하철 역 개수")
+st.markdown("11. 스타벅스 수")
 max_wid = 291.335999
 max_contract = 202204.0
 max_price = 450000
@@ -175,4 +185,27 @@ scaleData = [scaleData]
 res1 = xgb_model.predict(scaleData)
 
 # 결과 출력
-st.write(res1)
+# 한글 금액 단위로 표시해주는 함수
+
+
+def krw_to_korean_won(arg):
+    amount = arg.replace(',', '')
+    if int(amount) > 99999999:
+        # print amount[0:-8],'억',amount[-8:-4],'만',amount[-4:], '원'
+        return '{0}억 {1}만 {2}원'.format(amount[0:-8], amount[-8:-4], amount[-4:])
+    elif int(amount) > 9999:
+        # print amount[-8:-4],'만',amount[-4:], '원'
+        return '{0}만 {1}원'.format(amount[-8:-4], amount[-4:])
+    else:
+        # print amount[-4:],'원'
+        return '{0}원'.format(amount[-4:])
+
+
+st.subheader("선택하신 옵션은 다음과 같습니다: ", option)
+st.write("면적:", width, " 계약년월: ", contract, " 층:", floor, " 건축년도:", builtYear)
+result = round(res1[0] * 10000, -1)
+result = int(result)
+strresult = str(result)
+strresult = krw_to_korean_won(strresult)
+st.header("예측 집 값은 다음과 같습니다")
+st.header(strresult)
