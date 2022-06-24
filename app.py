@@ -38,10 +38,6 @@ st.write("""
 10. 지하철 역 개수
 11. 스타벅스 수 
 """)
-# st.markdown("1. 전용면적          2. 계약년월          3. 층")
-# st.markdown("4. 건축년도          5. 대규모 점포          6. 근린공원")
-# st.markdown("7. 반려동물 등록 수          8. 병원          9. 학교")
-# st.markdown("10. 지하철 역 개수          11. 스타벅스 수")
 max_wid = 291.335999
 max_contract = 202204.0
 max_price = 450000
@@ -230,7 +226,6 @@ df = load_data()
 
 # 차트
 yrmth_df = df.groupby('yrmth')['거래금액'].agg(AVG='mean', total='count')
-yrmth_df.info()
 vmin = np.min(yrmth_df['total'])
 vmax = np.max(yrmth_df['total'])
 fig = plt.figure(figsize=(20, 10))
