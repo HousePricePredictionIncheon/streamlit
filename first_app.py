@@ -209,3 +209,6 @@ strresult = str(result)
 strresult = krw_to_korean_won(strresult)
 st.header("예측 집 값은 다음과 같습니다")
 st.header(strresult)
+
+st.write("개발자 블로그")
+st.markdown("[호정의 개발 블로그](https://hojung-testbench.tistory.com/)")
