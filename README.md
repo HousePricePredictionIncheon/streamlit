@@ -26,3 +26,7 @@
 ~~~
 streamlit run first_app.py
 ~~~
+
+## 웹페이지 소개
+### 1. 변수 설명
+<img width ="80%" src = "https://user-images.githubusercontent.com/71626430/175750283-44574e0b-c571-45b4-9a3d-fbd84d771ddf.png" />
