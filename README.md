@@ -3,6 +3,11 @@
 ### 10개 정도의 동에 대한 집 값 예측을 제공하려고 하고 있습니다. 
 ## 인하대학교 인공지능 응용시스템 17조 조별 과제의 마무리
 
+## 사용 기술
+- 언어: <img src="https://img.shields.io/badge/Python-3766AB?style=flat-square&logo=Python&logoColor=white"/></a>
+- 웹 구현: <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=flat-square&logo=Streamlit&logoColor=white"/></a>
+- 배포: <img src="https://img.shields.io/badge/Heroku-430098?style=flat-square&logo=Heroku&logoColor=white"/></a>
+
 ## 사용 모델
 - XGBOOST
 - MLP
